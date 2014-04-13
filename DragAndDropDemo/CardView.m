@@ -19,11 +19,25 @@
     self.label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.label];
     
-    self.backgroundColor    = [UIColor whiteColor];
+    self.backgroundColor    = [UIColor brownColor];
     self.layer.cornerRadius = 10.0f;
   }
   return self;
 }
+
+//-(id)initWithCoder:(NSCoder *)aDecoder {
+//    self = [super initWithCoder:aDecoder];
+//    if (self) {
+//        self.label               = [[UILabel alloc] init];
+//        self.label.font          = [UIFont boldSystemFontOfSize:48];
+//        self.label.textAlignment = NSTextAlignmentCenter;
+//        [self addSubview:self.label];
+//
+//        self.backgroundColor    = [UIColor brownColor];
+//        self.layer.cornerRadius = 10.0f;
+//    }
+//    return self;
+//}
 
 - (void)layoutSubviews {
   [super layoutSubviews];

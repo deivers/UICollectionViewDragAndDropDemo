@@ -21,13 +21,22 @@ NSString * const CELL_REUSE_ID = @"CELL_ID";
 @implementation CardCell
 
 - (id)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
-  if (self) {
-    _cardView = [[CardView alloc] init];
-    [self.contentView addSubview:_cardView];
-  }
-  return self;
+    self = [super initWithFrame:frame];
+    if (self) {
+        _cardView = [[CardView alloc] init];
+        [self.contentView addSubview:_cardView];
+    }
+    return self;
 }
+
+//- (id)initWithCoder:(NSCoder *)aDecoder {
+//    self = [super initWithCoder:aDecoder];
+//    if (self) {
+//        _cardView = [[CardView alloc] init];
+//        [self.contentView addSubview:_cardView];
+//    }
+//    return self;
+//}
 
 - (void)setModel:(MyModel *)model {
   _model = model;

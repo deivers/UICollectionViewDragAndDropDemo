@@ -14,6 +14,7 @@
   ViewController *_parentController;
   NSMutableArray *_models;
   MyModel *_selectedModel;
+    int currentPage;
 }
 @end
 
@@ -25,7 +26,7 @@
     [self setUpModels];
     [self initCollectionView:view];
     [self setUpGestures];
-    
+      currentPage = 0;
     _parentController = parent;
   }
   return self;
@@ -63,8 +64,17 @@
   _collectionView            = view;
   _collectionView.delegate   = self;
   _collectionView.dataSource = self;
-  
+
   [_collectionView registerClass:[CardCell class] forCellWithReuseIdentifier:CELL_REUSE_ID];
+}
+
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    if (velocity.x > 0)
+        currentPage++;
+    else
+        currentPage--;
+    CGFloat hOffset = 250 + 270*(currentPage-1);
+    *targetContentOffset = CGPointMake(hOffset,0);
 }
 
 - (void)setUpGestures {
@@ -112,7 +122,7 @@
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-  return CGSizeMake(100, 120);
+  return CGSizeMake(260, 50);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

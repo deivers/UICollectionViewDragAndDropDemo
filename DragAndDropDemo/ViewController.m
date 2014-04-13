@@ -29,15 +29,14 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  _sourceViewController = [[SourceViewController alloc] initWithCollectionView:self.sourceCollectionView
-                                                       andParentViewController:self];
-  _destinationViewController = [[DestinationViewController alloc] initWithCollectionView:self.destinationCollectionView ];
+  _sourceViewController = [[SourceViewController alloc] initWithCollectionView:self.sourceCollectionView andParentViewController:self];
+  _destinationViewController = [[DestinationViewController alloc] initWithCollectionView:self.destinationCollectionView];
   
   [self initDraggedCardView];
   
-  UIPanGestureRecognizer *panGesture =
-    [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+  UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
   panGesture.delegate = self;
+    
   [self.view addGestureRecognizer:panGesture];
 }
 
@@ -70,7 +69,7 @@
 
 #pragma mark - initialization code
 - (void)initDraggedCardView {
-  _draggedCard = [[CardView alloc] initWithFrame:CGRectMake(0, 0, 120, 140)];
+  _draggedCard = [[CardView alloc] initWithFrame:CGRectMake(0, 0, 260, 50)];
   _draggedCard.hidden = YES;
   [_draggedCard setHighlightSelection:YES];
   

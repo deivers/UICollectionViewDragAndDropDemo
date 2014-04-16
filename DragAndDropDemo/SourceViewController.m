@@ -9,6 +9,9 @@
 #import "SourceViewController.h"
 #import "CardCell.h"
 
+#define draggableCellWidth 260
+#define horizontalInset 30
+
 @interface SourceViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
   UICollectionView *_collectionView;
   ViewController *_parentController;
@@ -64,16 +67,21 @@
   _collectionView            = view;
   _collectionView.delegate   = self;
   _collectionView.dataSource = self;
-
+    _collectionView.contentInset = UIEdgeInsetsMake(0, horizontalInset, 0, horizontalInset);
   [_collectionView registerClass:[CardCell class] forCellWithReuseIdentifier:CELL_REUSE_ID];
 }
 
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    currentPage = round(scrollView.contentOffset.x / 270);
     if (velocity.x > 0)
         currentPage++;
     else
         currentPage--;
-    CGFloat hOffset = 250 + 270*(currentPage-1);
+    if (currentPage < 0)
+        currentPage = 0;
+    else if (currentPage >= [_models count])
+        currentPage = [_models count]-1;
+    CGFloat hOffset = 240 + 270*(currentPage-1);        ////////////todo: handle landscape and ipad
     *targetContentOffset = CGPointMake(hOffset,0);
 }
 
@@ -122,11 +130,11 @@
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-  return CGSizeMake(260, 50);
+  return CGSizeMake(draggableCellWidth, 50);
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-  return UIEdgeInsetsMake(0, 10, 0, 10);
-}
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+//  return UIEdgeInsetsMake(0, 10, 0, 10);
+//}
 
 @end
